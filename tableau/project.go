@@ -8,12 +8,17 @@ import (
 	"strings"
 )
 
+type Owner struct {
+	ID string `json:"id" tfsdk:"id"`
+}
+
 type Project struct {
 	ID                 string `json:"id,omitempty"`
 	Name               string `json:"name,omitempty"`
 	ParentProjectID    string `json:"parentProjectId,omitempty"`
 	Description        string `json:"description,omitempty"`
 	ContentPermissions string `json:"contentPermissions,omitempty"`
+	Owner              Owner  `json:"owner,omitempty"`
 }
 
 type ProjectRequest struct {

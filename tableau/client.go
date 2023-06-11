@@ -16,8 +16,8 @@ type Client struct {
 }
 
 type Site struct {
-	ID         *string `json:"id"`
-	ContentUrl string  `json:"contentUrl"`
+	ID         string `json:"id"`
+	ContentUrl string `json:"contentUrl"`
 }
 
 type Credentials struct {
@@ -83,7 +83,7 @@ func NewClient(server, username, password, personalAccessTokenName, personalAcce
 			return nil, err
 		}
 
-		c.ApiUrl = fmt.Sprintf("%s/sites/%s", baseUrl, *ar.SignInResponseData.Site.ID)
+		c.ApiUrl = fmt.Sprintf("%s/sites/%s", baseUrl, ar.SignInResponseData.Site.ID)
 		c.AuthToken = ar.SignInResponseData.Token
 	}
 

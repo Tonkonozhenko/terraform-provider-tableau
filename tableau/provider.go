@@ -127,14 +127,6 @@ func (p *tableauProvider) Configure(ctx context.Context, req provider.ConfigureR
 		)
 	}
 
-	if config.Site.IsUnknown() {
-		resp.Diagnostics.AddAttributeError(
-			path.Root("site"),
-			"Unknown Tableau Site",
-			"Tableau Site must be provided in order to establish a connection",
-		)
-	}
-
 	if resp.Diagnostics.HasError() {
 		return
 	}
@@ -217,14 +209,6 @@ func (p *tableauProvider) Configure(ctx context.Context, req provider.ConfigureR
 		)
 	}
 
-	if site == "" {
-		resp.Diagnostics.AddAttributeError(
-			path.Root("site"),
-			"Missing Tableau Site",
-			"Tableau Site must be provided in order to establish a connection",
-		)
-	}
-
 	if resp.Diagnostics.HasError() {
 		return
 	}
@@ -259,6 +243,7 @@ func (p *tableauProvider) DataSources(_ context.Context) []func() datasource.Dat
 		GroupDataSource,
 		UserDataSource,
 		ProjectDataSource,
+		ProjectPermissionsDataSource,
 	}
 }
 
@@ -268,5 +253,6 @@ func (p *tableauProvider) Resources(_ context.Context) []func() resource.Resourc
 		NewGroupResource,
 		NewGroupUserResource,
 		NewProjectResource,
+		NewProjectPermissionResource,
 	}
 }
